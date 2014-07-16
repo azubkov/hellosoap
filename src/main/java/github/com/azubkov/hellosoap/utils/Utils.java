@@ -2,17 +2,20 @@ package github.com.azubkov.hellosoap.utils;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public final class Utils {
     private Utils() {
     }
 
-    public String getResource(String file) {
+    public static String getResource(String path) {
         try {
-            String content = Files.toString(new File("/home/x1/text.log"), Charsets.UTF_8);
+            URL url = Resources.getResource(path);
+            String content = Resources.toString(url, Charsets.UTF_8);
             return content;
         } catch (IOException e) {
             throw new RuntimeException(e);
