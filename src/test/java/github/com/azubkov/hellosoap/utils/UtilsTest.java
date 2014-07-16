@@ -10,15 +10,16 @@ public class UtilsTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void testGetResource() {
+    public void testGetResourceNotExist() {
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("java.io.FileNotFoundException: /home/x1/text.log (No such file or directory)");
+        expectedException.expectMessage("resource lox not found.");
         String string = Utils.getResource("lox");
     }
 
     @Test
-    public void testGetResource2() {
+    public void testGetResourceExist() {
         String string = Utils.getResource("github/com/azubkov/hellosoap/document/FarFarAway.txt");
         Assert.assertNotNull(string);
+        Assert.assertTrue(org.apache.commons.lang3.StringUtils.containsIgnoreCase(string, "far far away"));
     }
 }
