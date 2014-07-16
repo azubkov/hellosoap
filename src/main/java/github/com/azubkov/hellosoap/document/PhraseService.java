@@ -19,7 +19,7 @@ public interface PhraseService {
      * <a href="http://www.blindtextgenerator.com/lorem-ipsum">http://www.blindtextgenerator.com/lorem-ipsum</a>
      */
     @WebMethod
-    String getFarFarAway(int linesCount);
+    String getFarFarAway(int sentenceCount);
 
     /**
      * <a href="http://www.punoftheday.com/">http://www.punoftheday.com/</a>
