@@ -2,6 +2,8 @@ package github.com.azubkov.hellosoap.utils;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,5 +60,17 @@ public final class Utils {
             }
         }
         return list;
+    }
+
+    public static String toParagraph(List<String> list) {
+        if (CollectionUtils.isEmpty(list)) {
+            return StringUtils.EMPTY;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String s : list) {
+            sb.append(s);
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 }
