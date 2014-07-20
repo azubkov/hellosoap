@@ -37,4 +37,19 @@ public class UtilsTest {
         Assert.assertEquals(list.get(1), "Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.");
         Assert.assertEquals(list.get(2), "A small river named Duden flows by their place and supplies it with the necessary regelialia.");
     }
+
+    @Test
+    public void testToWords() {
+        List<String> list = Utils.toWords("Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.\n" +
+                "\n" +
+                " Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.\n" +
+                "\n" +
+                " A small river named Duden flows by their place and supplies it with the necessary regelialia.");
+        Assert.assertNotNull(list);
+        Assert.assertEquals(list.get(0), "Far");
+        Assert.assertEquals(list.get(1), "far");
+        Assert.assertEquals(list.get(2), "away");
+        Assert.assertEquals(list.get(3), "behind");
+        Assert.assertEquals(list.get(4), "the");
+    }
 }
