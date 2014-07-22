@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,11 +40,20 @@ public final class Utils {
                 list.add(target);
             }
         }
-        List<String> filtered = new ArrayList<String>();
-        for (String s : list) {
-            filtered.add(s.trim());
+        list = trim(list);
+        return list;
+    }
+
+    private static List<String> trim(Iterable<String> iterable) {
+        List<String> result = new ArrayList<String>();
+        for (String s : iterable) {
+            s = s.trim();
+            if (s.isEmpty()) {
+                continue;
+            }
+            result.add(s);
         }
-        return filtered;
+        return result;
     }
 
     public static List<String> toWords(String string) {
@@ -59,6 +69,12 @@ public final class Utils {
                 list.add(target);
             }
         }
+        return list;
+    }
+
+    public static List<String> toLines(String string) {
+        String lines[] = string.split("\\r?\\n");
+        List<String> list = trim(Arrays.asList(lines));
         return list;
     }
 

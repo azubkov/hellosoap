@@ -8,31 +8,51 @@ import java.util.List;
 
 @WebService(endpointInterface = "github.com.azubkov.hellosoap.document.PhraseService")
 public class PhraseServiceImpl implements PhraseService {
+
+    /**
+     * @param count wordCount
+     */
     @Override
-    public String getLoremIpsum(int worldsCount) {
-        if (worldsCount == 0) {
-            worldsCount = 2;/*yeah wonderful magic here*/
+    public String getLoremIpsum(int count) {
+        if (count == 0) {
+            count = 2;/*yeah wonderful magic here*/
         }
-        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        String resource = Utils.getResource("github/com/azubkov/hellosoap/document/LoremIpsum.txt");
+        List<String> list = Utils.toWords(resource);
+        Collections.shuffle(list);
+        count = Math.abs(count);
+        count = Math.min(count, list.size());
+        list = list.subList(0, count);
+        String result = Utils.toParagraph(list);
+        return result;
     }
 
+    /**
+     * @param count sentenceCount
+     */
     @Override
-    public String getFarFarAway(int sentenceCount) {
-        if (sentenceCount == 0) {
-            sentenceCount = 1;
+    public String getFarFarAway(int count) {
+        if (count == 0) {
+            count = 1;
         }
         String resource = Utils.getResource("github/com/azubkov/hellosoap/document/FarFarAway.txt");
         List<String> list = Utils.toSentences(resource);
         Collections.shuffle(list);
-        sentenceCount = Math.abs(sentenceCount);
-        sentenceCount = Math.min(sentenceCount, list.size());
-        list = list.subList(0, sentenceCount);
+        count = Math.abs(count);
+        count = Math.min(count, list.size());
+        list = list.subList(0, count);
         String result = Utils.toParagraph(list);
         return result;
     }
 
     @Override
     public String getPunOfTheDay() {
-        return "Do birds know where they're going when they fly south for the winter or do they just wing it every time?";
+        String resource = Utils.getResource("github/com/azubkov/hellosoap/document/PunOfTheDay.txt");
+        List<String> list = Utils.toLines(resource);
+        if (list.isEmpty()) {
+            throw new RuntimeException();
+        }
+        Collections.shuffle(list);
+        return list.get(0);
     }
 }
